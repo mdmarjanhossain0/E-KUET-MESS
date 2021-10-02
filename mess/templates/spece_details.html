@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ space.name }} | {% endblock %}
+
+{% load thumbnail %}
+
+{% block content %}
+
+  <!-- Showcase -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">{{ space.name }}</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Listing -->
+  <section id="listing" class="py-4">
+    <div class="container">
+      <div class="row">
+        <!-- Images -->
+        <div class="col-md-7">
+          <div class="container">
+            <div class="row">
+              <div class="px-1 shadow-sm">
+                {% if space.image_1 %}
+                {% thumbnail space.image_1 "1200x900" crop="100%" as photo %}
+                    <a href="{{ space.image_1.url }}" data-toggle="lightbox" data-gallery="gallery">
+                      <img src="{{ space.image_1.url }}">
+                    </a>
+                {% endthumbnail %}
+                {% endif %}
+              </div>
+            </div>
+            <div class="row mt-1">
+              <div class="col-3 px-1">
+                {% if space.image_2 %}
+                    <a href="{{ space.image_2.url }}" data-toggle="lightbox" data-gallery="gallery">
+                      <img src="{{ space.image_2.url }}">
+                    </a>
+                {% endif %}
+              </div>
+              <div class="col-3 px-1">
+                {% if space.image_3 %}
+                    <a href="{{ space.image_3.url }}" data-toggle="lightbox" data-gallery="gallery">
+                      <img src="{{ space.image_3.url }}">
+                    </a>
+                {% endif %}
+              </div>
+              <div class="col-3 px-1">
+                {% if space.image_4 %}
+                    <a href="{{ space.image_4.url }}" data-toggle="lightbox" data-gallery="gallery">
+                      <img src="{{ space.image_4.url }}">
+                    </a>
+                {% endif %}
+              </div>
+              <div class="col-3 px-1">
+                {% if space.image_5 %}
+                    <a href="{{ space.image_5.url }}" data-toggle="lightbox" data-gallery="gallery">
+                      <img src="{{ space.image_5.url }}">
+                    </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div class="col-md-5">
+          <div class="container">
+            <div class="row">
+              <h2><span class="h1">${{ space.price }}</span>/</h2>
+            </div>
+            <div class="row mt-4 font-italic">
+              <p>{{ space.total_room }}  </p>
+            </div>
+            <div class="row mt-1 font-italic">
+            adress
+            </div>
+            <div class="row mt-1 font-italic badge badge-danger">
+              <div class="text-light">{{ space.mess_type }}</div>
+            </div>
+            <hr class="mt-4">
+            <div class="row mt-4">
+              <div>{{ space.details }}</div>
+            </div>
+            <hr class="mt-3">
+            <div class="row mt-5">
+              <div class="col-9 mx-auto">
+                <button class="btn btn-outline-primary btn-block shadow-sm" data-toggle="modal"
+                        data-target="#inquiryModal"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Modal -->
+  <section>
+    <div class="modal fade" id="inquiryModal" role="dialog">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="inquiryModalLabel"></h5>
+            <button type="button" class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            {% comment %} <form action="#" method="POST">
+              {% csrf_token %}
+                <input type="hidden" name="user_id" value="{{  }}">
+{#              <input type="hidden" name="realtor_email" value="{{ listing.user.email }}">#}
+              <input type="hidden" name="listing_id" value="{{ space.mess }}">
+              <input type="hidden" name="listing" value="{{ space.name}}">
+              <div class="form-group">
+                <label for="name" class="col-form-label"></label>
+                <input type="text" name="name" class="form-control" {% if user.is_authenticated %}
+                       value="{{  }} {{  }}" {% endif %} required>
+              </div>
+              <div class="form-group">
+                <label for="email" class="col-form-label"></label>
+                <input type="email" name="email" class="form-control" {% if user.is_authenticated %}
+                       value="{{  }}" {% endif %}>
+              </div>
+              <div class="form-group">
+                <label for="phone" class="col-form-label"></label>
+                <input type="text" name="phone" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="message" class="col-form-label"></label>
+                <textarea name="message" class="form-control" rows="5" required></textarea>
+              </div>
+              <hr>
+              <input type="submit" value="" class="btn btn-block btn-primary">
+            </form> {% endcomment %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
